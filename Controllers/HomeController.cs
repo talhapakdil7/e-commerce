@@ -6,26 +6,21 @@ namespace e_commerce.Controllers;
 
 public class HomeController : Controller
 {
-    private readonly ILogger<HomeController> _logger;
+    
+    private readonly DataContext _context;
 
-    public HomeController(ILogger<HomeController> logger)
-    {
-        _logger = logger;
-    }
-
+        public HomeController(DataContext context)
+        {
+            _context = context;
+        }
+         
     public IActionResult Index()
     {
-        return View();
+
+        var urunler = _context.Urunler.Where(i=>i.Anasayfa && i.Aktif).ToList();
+        ViewData["Kategoriler"] = _context.Kategoriler.ToList();
+        return View(urunler);
     }
 
-    public IActionResult Privacy()
-    {
-        return View();
-    }
-
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
-    {
-        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-    }
+  
 }
