@@ -1,3 +1,4 @@
+
 using Microsoft.EntityFrameworkCore;
 
 namespace e_commerce.Models
@@ -12,14 +13,25 @@ namespace e_commerce.Models
             
         public DbSet<Urun> Urunler { get; set; }
         public DbSet<Kategori> Kategoriler { get; set; }
+        
+        public DbSet<Slider> Sliderlar { get; set; }
        
        override protected void OnModelCreating(ModelBuilder modelBuilder)
-        {
+    {
 
+      modelBuilder.Entity<Slider>().HasData(
+       new List<Slider>
+       {
+                   new Slider { Id = 1, Resim = "slider-1.jpeg", Baslik="Slider 1 Başlık", Aciklama="Slider 1 Açıklama", Aktif=true, Index=0 },
+                   new Slider { Id = 2, Resim = "slider-2.jpeg", Baslik="Slider 2 Başlık", Aciklama="Slider 2 Açıklama", Aktif=true, Index=1 },
+                   new Slider { Id = 3, Resim = "slider-3.jpeg", Baslik="Slider 3 Başlık", Aciklama="Slider 3 Açıklama", Aktif=true, Index=2 }
 
-            modelBuilder.Entity<Kategori>().HasData(
-               new List<Kategori>
-               {
+       }
+         );
+
+      modelBuilder.Entity<Kategori>().HasData(
+         new List<Kategori>
+         {
                    new Kategori { Id = 1, KategoriAdi = "Telefon", Url="telefon" },
                    new Kategori { Id = 2, KategoriAdi = "Elektronik", Url="elektronik" },
                    new Kategori { Id = 3, KategoriAdi = "Beyaz Eşya", Url="beyaz-esya" },
@@ -30,13 +42,13 @@ namespace e_commerce.Models
                       new Kategori { Id = 8, KategoriAdi = "Kategori 3", Url="kategori-3" },
                        new Kategori { Id = 9, KategoriAdi = "Kategori 4", Url="kategori-4" }
 
-               }
-                 );
+         }
+           );
 
 
-            modelBuilder.Entity<Urun>().HasData(
-              new List<Urun>
-              {
+      modelBuilder.Entity<Urun>().HasData(
+        new List<Urun>
+        {
                    new Urun { Id = 1, UrunAdi = "Apple Watch 8", Fiyat = 15000, Aktif = true , Anasayfa=true, Aciklama="Apple Watch 8 41mm Alüminyum Kasa ve Spor Kordon", Resim="1.jpeg" ,KategoriId=1 },
                    new Urun { Id = 2, UrunAdi = "Apple Watch 9", Fiyat = 8000, Aktif = false ,Anasayfa=true, Aciklama="Apple Watch 8 41mm Alüminyum Kasa ve Spor Kordon", Resim="2.jpeg",KategoriId=2 },
                    new Urun { Id = 3, UrunAdi = "Apple Watch 10", Fiyat = 6000, Aktif = true,Anasayfa=false, Aciklama="Apple Watch 8 41mm Alüminyum Kasa ve Spor Kordon", Resim="3.jpeg" ,KategoriId=3 },
@@ -46,8 +58,8 @@ namespace e_commerce.Models
                    new Urun { Id = 7, UrunAdi = "Apple Watch 13", Fiyat = 90000, Aktif = false,Anasayfa=true, Aciklama="Apple Watch 8 41mm Alüminyum Kasa ve Spor Kordon", Resim="7.jpeg",KategoriId=1  },
                   new Urun { Id = 8, UrunAdi = "Apple Watch 14", Fiyat = 80500, Aktif = true,Anasayfa=false, Aciklama="Apple Watch 8 41mm Alüminyum Kasa ve Spor Kordon", Resim="8.jpeg",KategoriId=5  }
 
-            }
-                );
-        }
+      }
+          );
+    }
     }
 }

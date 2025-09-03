@@ -28,6 +28,12 @@ app.UseAuthorization();
 app.MapStaticAssets();
 
 app.MapControllerRoute(
+    name: "urunler_by_kategori",
+    pattern: "urunler/{url}",
+    defaults: new { controller = "Urun", action = "List" }).WithStaticAssets();
+
+
+app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}")
     .WithStaticAssets();
