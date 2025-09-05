@@ -17,10 +17,33 @@ namespace e_commerce.Controllers
         {
             return View();
         }
-        public IActionResult List(string url)
+        public IActionResult List(string url, string q)
         {
-            var urunler = _context.Urunler.Where(i => i.Aktif && i.kategori.Url==url).ToList();
-            return View(urunler);
+            var query = _context.Urunler.AsQueryable();
+
+            if (!string.IsNullOrEmpty(url))
+            {
+
+                query = query.Where(i => i.kategori.Url == url );
+
+
+
+            }
+
+            if (!string.IsNullOrEmpty(q))
+            {
+
+                
+                query = query.Where(i => i.UrunAdi.ToLower().Contains(q.ToLower()));
+
+
+            }
+
+
+            // var urunler = _context.Urunler.Where(i => i.Aktif && i.kategori.Url==url).ToList();
+
+            return View(query.Where(i => i.Aktif).ToList());
+                
         }
         
         public ActionResult Details(int id)
